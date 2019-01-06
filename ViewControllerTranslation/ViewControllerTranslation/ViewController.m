@@ -22,6 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"12345";
+    
     // Do any additional setup after loading the view, typically from a nib.
     UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test2.png"]];
     [self.view addSubview:imageView];
@@ -38,15 +41,43 @@
     
     [self.view addSubview:button];
     
+    
+    button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    
+    [button setFrame:CGRectMake(100, 200, 200, 40)];
+    
+    [button setTitle:@"click me 2" forState:UIControlStateNormal];
+    
+    [button addTarget:self action:@selector(onClick2:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:button];
+    
+    
 //    self.transitioningDelegate = [ViewTransitionManager instance];
     
-    UIView * transView = [[UIView alloc] initWithFrame:CGRectMake(200, 400, 150, 150)];
+    UIView * transView = [[UIView alloc] initWithFrame:CGRectMake(200, 800, 150, 150)];
     
     transView.backgroundColor = [UIColor redColor];
+    
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    [imageView setImage:[UIImage imageNamed:@"test.png"]];
+    [transView addSubview:imageView];
     
     [self.view addSubview:transView];
     
     _targetView = transView;
+}
+
+- (void)onClick2:(id)sender{
+    
+    ShowViewController * ShowViewCtr = [ShowViewController new];
+    
+    self.navigationController.transitioningDelegate =[CommonModelViewControllerTransitionManager instance];
+    
+    [self.navigationController pushViewController:ShowViewCtr
+                                         animated:YES];
 }
 
 - (void)onClick:(id)sender{
